@@ -1,0 +1,77 @@
+DEFAULT vesamenu.c32 
+KBDMAP french.kbd
+MENU BACKGROUND config/background.png
+KBDMAP french.kbd
+MENU PASSPROMPT Entrez le mot de passe :
+MENU TABMSG Pressez [TAB] pour editer les options de boot
+ALLOWOPTIONS 1
+PROMPT 0
+MENU WIDTH 77
+MENU ROWS 14
+MENU TABMSGROW 25
+MENU CMDLINEROW 25
+MENU HELPMSGROW 23
+MENU MARGIN 15
+MENU VSHIFT 4
+MENU COLOR BORDER       30;44   #00000000 #00000000 none
+MENU COLOR SEL          7;37;40 #FEF86C #9090a0 std
+MENU COLOR HOTSEL       7;37;40 #ffffffff #204040f0 std
+MENU COLOR TIMEOUT_MSG  37;40   #aaaaaaaa #00000000 std
+MENU COLOR TIMEOUT      1;37;40 #ffaaaaff #00000000 std
+MENU COLOR hotkey       0       #FEF86C #ee000000 std  
+MENU HELP config/christophe.txt
+ 
+MENU TITLE **** PXE CITEL ****
+LABEL boot hdd
+    MENU LABEL Boot sur disque dur ^HDD0
+    LOCALBOOT 0
+
+MENU BEGIN diag 
+        MENU TITLE Diagnostiques et Outils
+        MENU LABEL Diagnostiques et ^Outils
+        MENU INCLUDE config/diag/menu.cfg
+MENU END
+
+MENU SEPARATOR
+
+MENU BEGIN debian 
+        MENU TITLE Debian
+        MENU LABEL ^Debian installation et LiveCDs
+        MENU INCLUDE config/debian/menu.cfg
+MENU END
+
+MENU SEPARATOR
+
+MENU BEGIN mageia 
+        MENU TITLE Mageia
+        MENU LABEL ^Mageia
+        MENU INCLUDE config/mageia/menu.cfg
+MENU END
+
+
+MENU SEPARATOR
+
+MENU BEGIN win
+    MENU LABEL Installation ^Windows 7 PRO 64bits
+    MENU PASSPROMPT #Veuillez saisir le mot de passe
+    MENU PASSWD -MD5 f71dbe52628a3f83a77ab494817525c6
+    TEXT HELP
+    /!\ mot de passe pour l'installation de Windows Pro 64 bits
+    ENDTEXT
+    MENU include config/menuwin/menu.cfg
+    #append config/menuwin/menu.cfg
+MENU END
+ 
+MENU SEPARATOR
+
+MENU BEGIN reboot
+    MENU INDENT 2
+    MENU LABEL ^Reboot
+    kernel reboot.c32
+MENU END 
+
+MENU BEGIN stop
+    MENU INDENT 2
+    MENU LABEL ^Shutdown
+    kernel poweroff.c32
+MENU END
